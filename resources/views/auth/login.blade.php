@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
   <main>
     <div class="box">
@@ -36,13 +38,13 @@
                 <input type="password" name="password" minlength="4" class="input-field" autocomplete="off" required />
                 <label>Senha</label>
               </div>
-              
-              <p class="text">                 
-                <a id="lbl-help" href="#">Esqueceu a Senha?</a>
+
+              <p class="text">
+              <p class="text">
+                <a id="lbl-help" href="{{ route('password.request') }}">Esqueceu a Senha?</a>
               </p>
-
+              </p>
               <input type="submit" value="Entrar" class="sign-btn" />
-
             </div>
           </form>
         </div>
@@ -73,8 +75,8 @@
       </div>
     </div>
   </main>
-
   <!-- Javascript file -->
-  <script src="{{ asset('js/register.js') }}"></script>
-</html>
+  <script src="{{ asset('js/register-login.js') }}"></script>
+</body>
 
+</html>

@@ -22,9 +22,11 @@ return new class extends Migration
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
+            $table->id(); // Adiciona um ID autoincrementado como chave primária
+            $table->string('email'); // Campo para armazenar o e-mail do usuário
+            $table->string('token'); // Campo para armazenar o token gerado
+            $table->timestamp('created_at')->nullable(); // Data de criação do token
+            $table->unique('email'); // Índice único para o campo 'email'
         });
 
         Schema::create('sessions', function (Blueprint $table) {
