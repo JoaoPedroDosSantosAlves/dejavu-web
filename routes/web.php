@@ -21,3 +21,12 @@ Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkE
 
 Route::get('reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+Route::get('/', function () {
+    return view('index'); // Certifique-se de ter o arquivo index.blade.php em resources/views
+})->name('index');
+
+// Rota para a tela contatos
+Route::get('/contatos', function () {
+    return view('contacts'); // Certifique-se de ter o arquivo contatos.blade.php em resources/views
+})->name('contacts');
