@@ -17,10 +17,10 @@
                 <div class="forms-wrap">
                     <form action="{{ route('register') }}" method="POST" autocomplete="off" class="sign-up-form">
                         @csrf
-                        <div class="logo">
-                            <img src="{{ asset('images/logo.png') }}" alt="" />
+                        <a href="{{ route('index')}}" class="logo" style="text-decoration: none;">
+                            <img src="{{ asset('/images/logo.png') }}" alt="easyclass" />
                             <h4>DEJAVU</h4>
-                        </div>
+                        </a>
 
                         <div class="heading">
                             <h2>Vamos Começar</h2>
@@ -30,46 +30,26 @@
 
                         <div class="actual-form">
                             <div class="input-wrap">
-                                <input
-                                    type="text"
-                                    name="name"
-                                    minlength="4"
-                                    class="input-field"
-                                    autocomplete="off"
+                                <input type="text" name="name" minlength="4" class="input-field" autocomplete="off"
                                     required />
                                 <label>Nome</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input
-                                    type="email"
-                                    name="email"
-                                    minlength="4"
-                                    class="input-field"
-                                    autocomplete="off"
+                                <input type="email" name="email" minlength="4" class="input-field" autocomplete="off"
                                     required />
                                 <label>E-mail</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input
-                                    type="password"
-                                    name="password"
-                                    minlength="4"
-                                    class="input-field"
-                                    autocomplete="off"
-                                    required />
+                                <input type="password" name="password" minlength="4" class="input-field"
+                                    autocomplete="off" required />
                                 <label>Senha</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input
-                                    type="password"
-                                    name="password_confirmation"
-                                    minlength="4"
-                                    class="input-field"
-                                    autocomplete="off"
-                                    required />
+                                <input type="password" name="password_confirmation" minlength="4" class="input-field"
+                                    autocomplete="off" required />
                                 <label>Confirme a Senha</label>
                             </div>
 
@@ -113,4 +93,5 @@
     <!-- Javascript file -->
     <script src="{{ asset('js/register-login.js') }}"></script>
 </body>
+
 </html>

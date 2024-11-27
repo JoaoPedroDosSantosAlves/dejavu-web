@@ -17,10 +17,10 @@
         <div class="forms-wrap">
           <form action="{{ route('login') }}" method="POST" autocomplete="off" class="sign-in-form">
             @csrf
-            <div class="logo">
+            <a href="{{ route('index')}}" class="logo" style="text-decoration: none;">
               <img src="{{ asset('/images/logo.png') }}" alt="easyclass" />
               <h4>DEJAVU</h4>
-            </div>
+            </a>
 
             <div class="heading">
               <h3>Seja Bem-Vindo!</h3>
