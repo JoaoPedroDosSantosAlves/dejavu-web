@@ -30,3 +30,8 @@ Route::get('/', function () {
 Route::get('/contatos', function () {
     return view('contacts'); // Certifique-se de ter o arquivo contatos.blade.php em resources/views
 })->name('contacts');
+
+// Rota para a tela about-us
+Route::get('/about-us', function () {
+    return view('about-us'); // Certifique-se de ter o arquivo contatos.blade.php em resources/views
+})->name('about-us');

@@ -13,9 +13,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent ">
         <div class="container">
             <!--Logo-->
-            <a href="index.html">
-            <img src="{{ asset('/images/writelogo.png') }}"  alt="Logo Dejavu" class="logo-img">
-            </a>
+            <img src="{{ asset('/images/writelogo.png') }}" alt="Logo Dejavu" class="logo-img">
             <!--Toggle Button-->
             <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar" aria-label="Toggle navigation">
@@ -26,7 +24,7 @@
             <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvas-navbar"
                 aria-labelledby="offcanvas-navbar-label">
                 <div class="offcanvas-header">
-                <img src="{{ asset('/images/index-woman.png') }}"  alt="Logo Dejavu" class="logo-img-sidebar"
+                    <img src="{{ asset('/images/index-woman.png') }}" alt="Logo Dejavu" class="logo-img-sidebar"
                         style="margin-top: 15px;">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
@@ -36,10 +34,7 @@
                             <a class="nav-link" href="{{ route('contacts') }}">Contatos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about-us.html">Sobre Nós</a>
-                        </li>
-                        </li>
-                        <a class="nav-link" href="#">Plano</a>
+                            <a class="nav-link" href="{{ route('about-us')}}">Sobre Nós</a>
                         </li>
                     </ul>
 
@@ -58,11 +53,11 @@
             <h1 class="title">O Primeiro<br>Passo Para<br>Mudar</h1>
             <div class="buttons">
                 <a href="{{ route('login') }}" class="button primary">Comece por aqui</a>
-                
+
             </div>
         </div>
         <div class="image-container">
-        <img src="{{ asset('/images/index-woman.png') }}"  alt="teste" style="width: 449px; height: 509px;">
+            <img src="{{ asset('/images/index-woman.png') }}" alt="teste" style="width: 449px; height: 509px;">
         </div>
     </section>
     <!--End Hero Section-->
@@ -80,13 +75,13 @@
 
             <!--slide images start-->
             <div class="slide first">
-            <img src="{{ asset('/images/screen-register.png') }}"  alt="">
+                <img src="{{ asset('/images/screen-register.png') }}" alt="">
             </div>
             <div class="slide">
-            <img src="{{ asset('/images/screen-menu.png') }}"  alt="">
+                <img src="{{ asset('/images/screen-menu.png') }}" alt="">
             </div>
             <div class="slide">
-            <img src="{{ asset('/images/screen-calendar.png') }}"  alt="">
+                <img src="{{ asset('/images/screen-calendar.png') }}" alt="">
             </div>
             <!--slide images end-->
 
@@ -111,7 +106,7 @@
             </p>
         </div>
         <div class="image-section">
-        <img src="{{ asset('/images/post-it.png') }}"  alt="teste">
+            <img src="{{ asset('/images/post-it.png') }}" alt="teste">
         </div>
     </section>
     <!--Fim da Seção de texto 1-->
@@ -126,7 +121,7 @@
             </p>
         </div>
         <div class="image-section2">
-        <img src="{{ asset('/images/calendar.png') }}" alt="teste">
+            <img src="{{ asset('/images/calendar.png') }}" alt="teste">
         </div>
     </section>
     <!--Fim da Seção de texto 2-->
@@ -140,7 +135,7 @@
             </p>
         </div>
         <div class="image-section3">
-        <img src="{{ asset('/images/daily.jpg') }}" alt="teste">
+            <img src="{{ asset('/images/daily.jpg') }}" alt="teste">
         </div>
     </section>
     <!--Fim da Seção de texto 2-->
@@ -153,32 +148,35 @@
                     <h4>Dejavu</h4>
                     <ul>
                         <li>
-                            <p>Agora você pode planejar, priorizar e acompanhar suas atividades diárias de forma fácil e eficiente. Menos stress, mais produtividade! </p>
+                            <p>Agora você pode planejar, priorizar e acompanhar suas atividades diárias de forma fácil e
+                                eficiente. Menos stress, mais produtividade! </p>
                         </li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Sobre</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="contacts.html">Contato</a></li>
-                        <li><a href="about-us.html">Sobre</a></li>
-                        <li><a href="#">Plano</a></li>
+                        <li><a href="{{ route('index') }}">Home</a></li>
+                        <li><a href="{{ route('contacts') }}">Contato</a></li>
+                        <li><a href="{{ route('about-us') }}">Sobre</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Informação</h4>
+                    <h4>Sobre-Nós</h4>
                     <ul>
-                        <li><a href="#">Politica de privacidade</a></li>
-                        <li><a href="#">Termos & Condições</a></li>
-                        <li><a href="contacts.html">Suporte</a></li>
+                        <li><a
+                                href="https://linktr.ee/Dejavu?fbclid=PAZXh0bgNhZW0CMTEAAabGfx4kNTHa0phtPDyny1ZAzAECH2b77p-4Su1iL6ocpHOZIFIpZxYQfFw_aem_Cg3NWZqrG1AzPhLRB3C46Q">Linktree</a>
+                        </li>
+                        <li style="visibility: hidden;"><a href="#">Termos&Condições</a></li>
+                        <li style="visibility: hidden;"><a href="#">Suporte</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href=" https://www.instagram.com/oficialmeudejavu/ "><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/dejavu-undefined-3b9035338/"><i
+                                class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>
