@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\TasksController;
 
 // Rota de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -50,6 +51,6 @@ Route::middleware('auth')->get('/quiz', function () {
 })->name('quiz');
 
 Route::middleware('auth')->group(function () {
-
-    Route::resource('posts', UserController::class);
+    Route::resource('tasks', TasksController::class);
+    Route::resource('rooms', TasksController::class);
 });
