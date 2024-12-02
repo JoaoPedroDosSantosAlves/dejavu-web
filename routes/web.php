@@ -40,3 +40,16 @@ Route::get('/about-us', function () {
 Route::middleware('auth')->get('/home', function () {
     return view('home'); // Exibe a view home.blade.php
 })->name('home');
+
+Route::middleware('auth')->get('/library', function () {
+    return view('library'); 
+})->name('library');
+
+Route::middleware('auth')->get('/quiz', function () {
+    return view('quiz'); 
+})->name('quiz');
+
+Route::middleware('auth')->group(function () {
+
+    Route::resource('posts', UserController::class);
+});

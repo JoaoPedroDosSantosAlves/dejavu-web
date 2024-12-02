@@ -13,11 +13,11 @@
 
     <div class="container">
         <div class="sidebar">
-            <button id="logo-main">D</button>
+            <img src="{{ asset('/images/writelogo.png') }}">
             <div class="menu">
                
 
-                <a href="home.html">
+            <a href="{{ route('home') }}">
                     <button class="nav-button">
                         <i class="fas fa-home"></i>
                         <span>Cartões</span>
@@ -30,7 +30,7 @@
                         <span>Calendário</span>
                     </button>
                 </a>
-                <a href="library.html">
+                <a href="{{ route('library') }}">
                     <button class="nav-button">
                         <i class="fas fa-bars"></i>
                         <span>Biblioteca</span>
@@ -38,14 +38,14 @@
                 </a>
 
                  <!-- Botão para abrir o modal com ícone + -->
-                 <a href="quiz.html">
+                 <a href="{{ route('quiz') }}">
                     <button class="nav-button">
                         <i class="fas fa-question-circle"></i>
                         <span>Quiz</span>
                     </button>
                 </a>
 
-                <a href="index.html" class="logout">
+                <a href="{{ route('index') }}" class="logout">
                     <button class="nav-button">
                         <i class="fas fa-sign-out-alt"></i>
                         <span>Logout</span>
@@ -62,13 +62,6 @@
             </div>
         </div>
     </div>
-
-
-
-   
-
-
-
     <!-- Modal para adicionar uma nova tarefa -->
     <div class="modal" id="taskModal">
         <div class="modal-content">
@@ -89,20 +82,15 @@
         <button id="cancelDeleteButton">Cancelar</button>
     </div>
 </div>
-
-
-
     <!-- Botão de menu lateral -->
     <div class="hamburger" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </div>
-
     <!-- Scripts -->
-    <script src="assets/js/home.js"></script> <!-- Script home.js -->
-    <script src="assets/js/add-card.js"></script>
-    <script src="assets/js/sidebar.js"></script>
-    <script src="assests/js/to-do-list.js"></script>
-
+    <script src="{{ asset('js/add-card.js') }}"></script> <!-- Script home.js -->
+    <script src="{{ asset('js/to-do-list.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/sidebar.js') }}"></script>
     <script>
         // Abertura do modal para adicionar tarefa
         document.getElementById('addTaskButton').addEventListener('click', function(event) {
@@ -115,8 +103,5 @@
             document.getElementById('taskModal').style.display = 'none';
         });
     </script>
-
-
-
 </body>
 </html>
