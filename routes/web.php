@@ -5,7 +5,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\TasksController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\TaskController;
 
 // Rota de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -50,7 +51,23 @@ Route::middleware('auth')->get('/quiz', function () {
     return view('quiz'); 
 })->name('quiz');
 
+
 Route::middleware('auth')->group(function () {
-    Route::resource('tasks', TasksController::class);
-    Route::resource('rooms', TasksController::class);
+    // Rotas para Cards
+    Route::resource('cards', CardController::class);
+
+    // Rotas para Tasks vinculadas a Cards
+    Route::resource('cards.tasks', TaskController::class)->shallow();
+    // Rota para deletar card
+    Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
 });
+
+Route::get('/home', [CardController::class, 'index'])->name('home');
+
+Route::post('tasks/{cardId}/store', [TaskController::class, 'store'])->name('tasks.store');
+
+Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
+
+Route::get('/tasks/{cardId}', [TaskController::class, 'index'])->name('tasks.index');
+
+Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');

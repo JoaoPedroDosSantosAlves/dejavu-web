@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/home.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}" />
-    <title>Cards</title>
-    <link rel="icon" href="assets/img/dejavu-logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Gerenciar Cards</title>
 </head>
-<body>
 
+<body>
     <div class="container">
+        <!-- Sidebar -->
         <div class="sidebar">
             <img src="{{ asset('/images/writelogo.png') }}">
             <div class="menu">
-               
-
-            <a href="{{ route('home') }}">
+                <a href="{{ route('home') }}">
                     <button class="nav-button">
                         <i class="fas fa-home"></i>
                         <span>Cartões</span>
@@ -37,8 +36,7 @@
                     </button>
                 </a>
 
-                 <!-- Botão para abrir o modal com ícone + -->
-                 <a href="{{ route('quiz') }}">
+                <a href="{{ route('quiz') }}">
                     <button class="nav-button">
                         <i class="fas fa-question-circle"></i>
                         <span>Quiz</span>
@@ -54,54 +52,115 @@
             </div>
         </div>
 
+        <!-- Main Content -->
         <div class="main">
-            <h1 class="title">Cartões</h1>
-            <div class="add-task-button" id="addTaskButton">+ Adicionar</div>
-            <div class="cards-container" id="cardsContainer">
-                <!-- Cards aqui -->
+            <h1>Gerenciar Cards</h1>
+
+            <!-- Botão de adicionar -->
+            <button onclick="openModal()" class="add-task-button">Adicionar Card</button>
+
+            <!-- Listagem de Cards -->
+            <div class="cards-container">
+                @forelse($cards as $card)
+                <div class="card" onclick="openTaskModal({{ $card->id }})">
+                    <h3>{{ strtoupper($card->name) }}</h3>
+                    @if ($card->image)
+                    <img src="{{ asset('storage/' . $card->image) }}" alt="Imagem do Card">
+                    @endif
+                    <form action="{{ route('cards.destroy', $card) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-button" id="delete-card-{{ $card->id }}">Excluir</button>
+                    </form>
+                </div>
+                @empty
+                <p>Não há cards cadastrados.</p>
+                @endforelse
             </div>
         </div>
     </div>
-    <!-- Modal para adicionar uma nova tarefa -->
-    <div class="modal" id="taskModal">
+
+    <!-- Modal para Adicionar Card -->
+    <div id="modal" class="modal" style="display: none;">
         <div class="modal-content">
-            <h2>Adicionar novo card</h2>
-            <input type="text" id="taskName" placeholder="Nome da tarefa" required>
-            <input type="file" id="taskImage" accept="image/*">
-            <button id="saveTaskButton">Salvar Tarefa</button>
-            <button id="closeModalButton">Fechar</button>
+            <h2>Adicionar Card</h2>
+            <form action="{{ route('cards.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <label for="name">Nome do Card:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="image">Imagem (opcional):</label>
+                <input type="file" id="image" name="image" accept="image/*">
+
+                <button type="submit" class="save-button">Salvar</button>
+                <button type="button" onclick="closeModal()" class="close-button">Cancelar</button>
+            </form>
         </div>
     </div>
 
-    <!-- Modal de Confirmação -->
-<div id="confirmationModal" class="modal">
-    <div class="modal-content">
-        <p>Você tem certeza que deseja</p>
-        <p> deletar esta tarefa?</p>
-        <button id="confirmDeleteButton">Sim</button>
-        <button id="cancelDeleteButton">Cancelar</button>
+    <!-- Modal para Gerenciar Tarefas -->
+    <div id="modal-task" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>Adicionar Tarefa</h2>
+            <form action="" method="POST" id="task-form">
+                @csrf
+                <input type="hidden" name="card_id" id="card_id">
+
+                <label for="task_name">Nome da Tarefa:</label>
+                <input type="text" name="name" id="task_name" required>
+
+                <label for="due_date">Data de Vencimento:</label>
+                <input type="date" name="due_date" required>
+
+                <label for="due_time">Hora de Vencimento:</label>
+                <input type="time" name="due_time" required>
+
+                <button type="submit">Adicionar Tarefa</button>
+                <button type="button" onclick="closeModalTask()" class="close-button">Cancelar</button>
+            </form>
+
+            <!-- Aqui é onde as tarefas serão listadas -->
+            <div id="task-container"></div>
+        </div>
     </div>
-</div>
-    <!-- Botão de menu lateral -->
-    <div class="hamburger" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </div>
-    <!-- Scripts -->
-    <script src="{{ asset('js/add-card.js') }}"></script> <!-- Script home.js -->
-    <script src="{{ asset('js/to-do-list.js') }}"></script>
-    <script src="{{ asset('js/home.js') }}"></script>
-    <script src="{{ asset('js/sidebar.js') }}"></script>
+
     <script>
-        // Abertura do modal para adicionar tarefa
-        document.getElementById('addTaskButton').addEventListener('click', function(event) {
-            event.preventDefault();
-            document.getElementById('taskModal').style.display = 'flex';
-        });
-    
-        // Fechar o modal de adicionar tarefa
-        document.getElementById('closeModalButton').addEventListener('click', function() {
-            document.getElementById('taskModal').style.display = 'none';
-        });
+        function openModal() {
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function openTaskModal(cardId) {
+            document.getElementById('card_id').value = cardId;
+            document.getElementById('task-form').action = `/tasks/${cardId}/store`;
+
+            // Faz a requisição para carregar as tarefas
+            const url = `/tasks/${cardId}`;
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Erro ao carregar tarefas');
+                    return response.json();
+                })
+                .then(tasks => {
+                    const container = document.getElementById('task-container');
+                    container.innerHTML = tasks.length ? 
+                        tasks.map(task => `<div>${task.name} - ${task.due_date} ${task.due_time}</div>`).join('') 
+                        : `<p>Sem tarefas!</p>`;
+                })
+                .catch(() => alert('Erro ao carregar tarefas!'));
+
+            document.getElementById('modal-task').style.display = 'block';
+        }
+
+        function closeModalTask() {
+            document.getElementById('modal-task').style.display = 'none';
+        }
     </script>
+    <script src="{{ asset('js/sidebar.js') }}"></script>
+
 </body>
+
 </html>

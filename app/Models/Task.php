@@ -2,47 +2,30 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class Task extends Authenticatable
+class Task extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
-        'email',
-        'password',
+        'due_date',
+        'due_time',
+        'status',
+        'card_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    // Definindo as constantes para o status
+    const STATUS_PENDING = 'não concluído';
+    const STATUS_COMPLETED = 'concluído';
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Relacionamento: Uma tarefa pertence a um card.
      */
-    protected function casts(): array
+    public function card()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Card::class);
     }
 }
