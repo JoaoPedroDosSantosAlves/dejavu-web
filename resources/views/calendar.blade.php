@@ -124,10 +124,14 @@
     <script>
         function navigateMonth(direction) {
             const currentMonth = {
+                
                     $month
+                
             };
             const currentYear = {
+                
                     $year
+                
             };
             let newMonth = currentMonth + direction;
 
@@ -141,7 +145,6 @@
 
             window.location.href = `/calendar?month=${newMonth}&year=${currentYear}`;
         }
-
 
         function fetchTasksForDate(date) {
             fetch(`/calendar/tasks/${date}`, {
