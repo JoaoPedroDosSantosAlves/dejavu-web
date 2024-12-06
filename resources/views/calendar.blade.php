@@ -122,20 +122,22 @@
 
     <script>
         function navigateMonth(direction) {
-            const currentMonth = {{ $month }};
-            const currentYear = {{ $year }};
-            let newMonth = currentMonth + direction;
+    let currentMonth = {{ $month }}; // Use 'let' aqui, pois você vai modificar o valor de currentMonth
+    let currentYear = {{ $year }}; // Use 'let' aqui também, para poder modificar currentYear
 
-            if (newMonth > 12) {
-                newMonth = 1;
-                currentYear++;
-            } else if (newMonth < 1) {
-                newMonth = 12;
-                currentYear--;
-            }
+    let newMonth = currentMonth + direction;
 
-            window.location.href = `/calendar?month=${newMonth}&year=${currentYear}`;
-        }
+    if (newMonth > 12) {
+        newMonth = 1;
+        currentYear++;
+    } else if (newMonth < 1) {
+        newMonth = 12;
+        currentYear--;
+    }
+
+    // Redireciona para o novo mês e ano
+    window.location.href = `/calendar?month=${newMonth}&year=${currentYear}`;
+}
 
         function fetchTasksForDate(date) {
             fetch(`/calendar/tasks/${date}`, {
