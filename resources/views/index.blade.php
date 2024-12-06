@@ -25,7 +25,7 @@
             <div class="sidebar offcanvas offcanvas-start" tabindex="-1" id="offcanvas-navbar"
                 aria-labelledby="offcanvas-navbar-label">
                 <div class="offcanvas-header">
-                    <img src="{{ asset('/images/index-woman.png') }}" alt="Logo Dejavu" class="logo-img-sidebar"
+                    <img src="{{ asset('/images/writelogo.png') }}" alt="Logo Dejavu" class="logo-img-sidebar"
                         style="margin-top: 15px;">
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>

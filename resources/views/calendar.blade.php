@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<div class="container">
+    <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
             <img src="{{ asset('/images/writelogo.png') }}">
@@ -62,9 +62,9 @@
 
             <div class="calendar-container">
                 <div class="calendar-header">
-                    <button onclick="navigateMonth(-1)">Anterior</button>
+                    <button onclick="navigateMonth(-1)" class="btn">Anterior</button>
                     <h2>{{ Carbon\Carbon::createFromFormat('Y-m', "{$year}-{$month}")->format('F Y') }}</h2>
-                    <button onclick="navigateMonth(1)">Próximo</button>
+                    <button onclick="navigateMonth(1)" class="btn">Próximo</button>
                 </div>
 
                 <div id="calendar">
@@ -80,35 +80,36 @@
 
                     <div class="calendar-grid">
                         @php
-                            $firstDayOfMonth = Carbon\Carbon::createFromFormat('Y-m', "{$year}-{$month}")->startOfMonth();
-                            $daysInMonth = Carbon\Carbon::createFromFormat('Y-m', "{$year}-{$month}")->daysInMonth;
-                            $emptyDays = $firstDayOfMonth->dayOfWeek;
+                        $firstDayOfMonth = Carbon\Carbon::createFromFormat('Y-m', "{$year}-{$month}")->startOfMonth();
+                        $daysInMonth = Carbon\Carbon::createFromFormat('Y-m', "{$year}-{$month}")->daysInMonth;
+                        $emptyDays = $firstDayOfMonth->dayOfWeek;
                         @endphp
 
                         <!-- Dias vazios -->
                         @for ($i = 0; $i < $emptyDays; $i++)
-                            <div class="calendar-day empty"></div>
-                        @endfor
-
-                        <!-- Dias do mês -->
-                        @for ($day = 1; $day <= $daysInMonth; $day++)
-                            @php
-                                $date = Carbon\Carbon::create($year, $month, $day);
-                                $formattedDate = $date->format('Y-m-d');
-                                $hasTasks = $tasks->contains(function ($task) use ($formattedDate) {
-                                    return $task->due_date === $formattedDate;
-                                });
-                            @endphp
-                            <div 
-                                class="calendar-day @if ($hasTasks) has-tasks @endif" 
-                                onclick="fetchTasksForDate('{{ $formattedDate }}')">
-                                <span>{{ $day }}</span>
-                            </div>
-                        @endfor
+                            <div class="calendar-day empty">
                     </div>
+                    @endfor
+
+                    <!-- Dias do mês -->
+                    @for ($day = 1; $day <= $daysInMonth; $day++)
+                        @php
+                        $date=Carbon\Carbon::create($year, $month, $day);
+                        $formattedDate=$date->format('Y-m-d');
+                        $hasTasks = $tasks->contains(function ($task) use ($formattedDate) {
+                        return $task->due_date === $formattedDate;
+                        });
+                        @endphp
+                        <div
+                            class="calendar-day @if ($hasTasks) has-tasks @endif"
+                            onclick="fetchTasksForDate('{{ $formattedDate }}')">
+                            <span>{{ $day }}</span>
+                        </div>
+                        @endfor
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Modal -->
@@ -122,8 +123,12 @@
 
     <script>
         function navigateMonth(direction) {
-            const currentMonth = {{ $month }};
-            const currentYear = {{ $year }};
+            const currentMonth = {
+                    $month
+            };
+            const currentYear = {
+                    $year
+            };
             let newMonth = currentMonth + direction;
 
             if (newMonth > 12) {
@@ -137,13 +142,16 @@
             window.location.href = `/calendar?month=${newMonth}&year=${currentYear}`;
         }
 
+
         function fetchTasksForDate(date) {
             fetch(`/calendar/tasks/${date}`, {
-                headers: { 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') }
-            })
-            .then(response => response.json())
-            .then(tasks => showTasksModal(date, tasks))
-            .catch(error => console.error('Erro ao buscar tarefas:', error));
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(tasks => showTasksModal(date, tasks))
+                .catch(error => console.error('Erro ao buscar tarefas:', error));
         }
 
         function showTasksModal(date, tasks) {
@@ -172,4 +180,5 @@
         }
     </script>
 </body>
+
 </html>

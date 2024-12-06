@@ -1,9 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+:root {
+    --font-roboto: "Roboto", sans-serif;
+    --font-inter: "Inter", sans-serif;
+    --font-poppins: "poppins", sans-serif;
+}
+
 /* Estilo principal */
 .main {
     margin-left: 130px;
     padding: 50px;
     flex-grow: 1;
     overflow-y: auto;
+    font-family: var(--font-poppins);
+}
+
+.btn {
+    background-color: #593B7D;
+    color: white; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno */
+    border: none; /* Remover borda */ /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor de pointer ao passar o mouse */
+    transition: background-color 0.3s; /* Efeito de transição */
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    font-family: var(--font-roboto);
+}
+
+.btn:hover {
+    background-color: #A67AB9;
+    color: #674188;
 }
 
 h1 {
@@ -37,7 +67,7 @@ h1 {
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
     font-weight: bold;
-    background-color: #bdc5f3;
+    background-color: #593B7D;
     color: rgb(0, 0, 0);
     margin-left: 120px;
     padding: 5px 0;
@@ -78,7 +108,8 @@ h1 {
 
 /* Hover nos dias do calendário */
 .calendar-day:hover {
-    background-color: #bdc5f3;
+    background-color: #A67AB9;
+
     transform: scale(1.05);
 }
 
@@ -102,9 +133,16 @@ h1 {
 
 /* Estilos para responsividade */
 @media (max-width: 768px) {
+    .calendar-header h2 {
+        margin-top: auto;
+        margin-left: 10px;
+    }
     .main {
         margin-left: 0;
         padding: 20px;
+    }
+    .week-header {
+        width: auto;
     }
 
     h1 {

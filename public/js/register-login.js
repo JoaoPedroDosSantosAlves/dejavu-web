@@ -67,25 +67,76 @@ function startAutoSlide() {
 
 // Inicia o carrossel automático ao carregar a página
 startAutoSlide();
-function togglePasswordVisibility(fieldId) {
-    const field = document.getElementById(fieldId);
-    const icon = field.nextElementSibling;
 
-    if (field.type === 'password') {
-        field.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
+document.querySelector('.sign-up-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Previne o envio do formulário
+
+    const email = document.querySelector('input[name="email"]').value;
+    const password = document.getElementById('password').value;
+    const passwordConfirmation = document.getElementById('password_confirmation').value;
+
+    // Verifica se as senhas coincidem
+    if (password !== passwordConfirmation) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'As senhas não coincidem.',
+        }).then(() => {
+            // Limpa os campos de senha e confirmação
+            document.getElementById('password').value = '';
+            document.getElementById('password_confirmation').value = '';
+        });
+        return; // Impede o envio do formulário
+    }
+
+    // Verifica se o e-mail já existe no banco
+    fetch("{{ route('check.email') }}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+        body: JSON.stringify({ email: email })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.exists) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'O e-mail já está em uso.',
+            }).then(() => {
+                // Limpa o campo de e-mail
+                document.querySelector('input[name="email"]').value = '';
+            });
+        } else {
+            // Se o e-mail não existir, envia o formulário
+            this.submit();
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao verificar o e-mail:', error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'O e-mail já está em uso. Tente novamente.',
+        });
+    });
+});
+
+function togglePasswordVisibility(id) {
+    var passwordField = document.getElementById(id);
+    var type = passwordField.type;
+
+    // Altera o tipo do input entre 'password' e 'text'
+    if (type === 'password') {
+        passwordField.type = 'text';
     } else {
-        field.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
+        passwordField.type = 'password';
     }
 }
-setTimeout(function () {
-    const messages = document.querySelectorAll('.error-messages, .success-message');
-    messages.forEach(function (message) {
-        message.style.opacity = '0';
-        setTimeout(() => message.remove(), 500); // Remove o elemento após o fade out
-    });
-}, 5000); // 3000ms = 3 segundos
+
+
+
+
 
