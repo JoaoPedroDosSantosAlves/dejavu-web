@@ -417,3 +417,37 @@ label {
         font-size: 0.75rem;
     }
 }
+.message-container {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    max-width: 90%;
+    text-align: center;
+  }
+
+  .message-success {
+    background-color: #4caf50;
+  }
+
+  .message-error {
+    background-color: #f44336;
+  }
+  .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #593b7d;
+}
+
+.toggle-password:hover {
+    color: #ad74f3;
+}

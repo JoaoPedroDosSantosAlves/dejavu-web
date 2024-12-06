@@ -12,6 +12,18 @@
 
 <body>
   <main>
+    <!-- Mensagens de Sucesso ou Erro -->
+  @if (session('success'))
+    <div class="message-container message-success">
+      {{ session('success') }}
+    </div>
+  @endif
+
+  @if (session('error'))
+    <div class="message-container message-error">
+      {{ session('error') }}
+    </div>
+  @endif
     <div class="box">
       <div class="inner-box">
         <div class="forms-wrap">
@@ -35,8 +47,9 @@
               </div>
 
               <div class="input-wrap">
-                <input type="password" name="password" minlength="4" class="input-field" autocomplete="off" required />
+                <input type="password" name="password" id="password" minlength="4" class="input-field" autocomplete="off" required />
                 <label>Senha</label>
+                <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
               </div>
 
               <p class="text">
@@ -75,6 +88,20 @@
       </div>
     </div>
   </main>
+  <script>
+    // Script para desaparecer as mensagens automaticamente
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = document.querySelector('.message-container');
+        if (message) {
+            setTimeout(() => {
+                message.style.transition = 'opacity 0.5s ease';
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 500); // Remove o elemento após o fade-out
+            }, 3000); // Tempo em milissegundos antes de desaparecer (3 segundos)
+        }
+    });
+</script>
+
   <!-- Javascript file -->
   <script src="{{ asset('js/register-login.js') }}"></script>
 </body>

@@ -12,6 +12,24 @@
 
 <body>
     <main>
+        <!-- Mensagens de erro -->
+        @if ($errors->any())
+        <div class="error-messages">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <!-- Mensagem de sucesso -->
+        @if (session('success'))
+        <div class="success-message">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="box">
             <div class="inner-box">
                 <div class="forms-wrap">
@@ -30,27 +48,25 @@
 
                         <div class="actual-form">
                             <div class="input-wrap">
-                                <input type="text" name="name" minlength="4" class="input-field" autocomplete="off"
-                                    required />
+                                <input type="text" name="name" minlength="4" class="input-field" autocomplete="off" value="{{ old('name') }}" required />
                                 <label>Nome</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input type="email" name="email" minlength="4" class="input-field" autocomplete="off"
-                                    required />
+                                <input type="email" name="email" minlength="4" class="input-field" autocomplete="off" value="{{ old('email') }}" required />
                                 <label>E-mail</label>
                             </div>
 
                             <div class="input-wrap">
-                                <input type="password" name="password" minlength="4" class="input-field"
-                                    autocomplete="off" required />
+                                <input type="password" name="password" id="password" minlength="4" class="input-field" autocomplete="off" required />
                                 <label>Senha</label>
+                                <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password')"></i>
                             </div>
 
                             <div class="input-wrap">
-                                <input type="password" name="password_confirmation" minlength="4" class="input-field"
-                                    autocomplete="off" required />
+                                <input type="password" name="password_confirmation" id="password_confirmation" minlength="4" class="input-field" autocomplete="off" required />
                                 <label>Confirme a Senha</label>
+                                <i class="fas fa-eye toggle-password" onclick="togglePasswordVisibility('password_confirmation')"></i>
                             </div>
 
                             <input type="submit" value="Criar Conta" class="sign-btn" />

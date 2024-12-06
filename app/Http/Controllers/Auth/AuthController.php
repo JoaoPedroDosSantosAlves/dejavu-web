@@ -16,21 +16,15 @@ class AuthController extends Controller
 
     // Método para realizar o login
     public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
+{
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            // Autenticação bem-sucedida
-            return redirect()->intended('home')->with('success', 'Login realizado com sucesso!');
-        }
-
-        // Se falhar, redireciona de volta com erro
-        return redirect()->back()->withErrors(['email' => 'As credenciais fornecidas estão incorretas.']);
+    if (Auth::attempt($credentials)) {
+        return redirect()->route('home')->with('success', 'Login realizado com sucesso!');
+    } else {
+        return redirect()->back()->with('error', 'E-mail ou senha incorretos. Tente novamente.');
     }
-
+}
     // Método para realizar o logout
     public function logout()
     {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class RegisteredUserController extends Controller
 {
@@ -17,20 +18,25 @@ class RegisteredUserController extends Controller
 
     // Método para processar o registro
     public function register(Request $request)
-    {
-        // Validação dos dados
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|min:4',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
 
-        // Criação do usuário
-        User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
-        ]);
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput();
+    }
+
+    // Cadastro bem-sucedido
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+    ]);
 
         // Redireciona após o cadastro
         return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso. Você pode fazer login.');
