@@ -15,4 +15,13 @@ class TaskPolicy
     {
         return $user->id === $card->user_id;
     }
+    public function delete(User $user, Task $task)
+{
+    return $user->id === $task->user_id; // O usuário só pode excluir suas próprias tarefas
+}
+public function update(User $user, Task $task)
+    {
+        // Permitir apenas se a tarefa pertence ao usuário autenticado
+        return $user->id === $task->user_id;
+    }
 }

@@ -88,7 +88,7 @@ class CardController extends Controller
         $card->update($validated);
 
         // Retorna o card atualizado
-        return response()->json($card);
+         return redirect()->route('home');
     }
 
     /**

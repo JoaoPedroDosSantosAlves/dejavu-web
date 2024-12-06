@@ -62,11 +62,11 @@ body {
     color: #666;
 }
 
-.delete-button {
+.edit-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: rgb(148, 108, 243);
+    background-color: #593B7D;
     color: white;
     border: none;
     border-radius: 5px;
@@ -75,7 +75,7 @@ body {
 }
 
 .add-task-button {
-    border: 2px dashed #000;
+    border: 2px;
     padding: 10px 20px;
     margin-top: 40px;
     margin-bottom: 15px;
@@ -83,59 +83,11 @@ body {
     text-align: center;
     width: fit-content;
     border-radius: 7px;
-}
-
-/* Estilos para modals */
-.modal {
-    display: none;  /* Inicialmente oculta */
-    position: fixed;
-    top: 50%;  /* Coloca a modal no meio da tela verticalmente */
-    left: 50%;  /* Coloca a modal no meio da tela horizontalmente */
-    transform: translate(-50%, -50%);  /* Ajusta a posição para que ela fique centralizada */
-    width: 100%;  /* A modal ocupa 100% da largura da tela */
-    height: 100%;  /* A modal ocupa 100% da altura da tela */
-    background-color: rgba(0, 0, 0, 0.5);  /* Fundo semitransparente */
-    z-index: 1000;  /* Garante que a modal fique sobre outros elementos */
-    display: flex;
-    justify-content: center;  /* Centraliza horizontalmente o conteúdo */
-    align-items: center;  /* Centraliza verticalmente o conteúdo */
-}
-
-/* Conteúdo da modal */
-.modal-content {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 500px;  /* Largura fixa da modal */
-    max-width: 100%;  /* Responsivo para telas pequenas */
-    text-align: center;
-}
-
-/* Estilos do modal de input */
-.modal input[type="text"],
-.modal input[type="file"] {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 12px; /* Aumentei o padding para um visual mais espaçoso */
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-/* Estilos dos botões dentro do modal */
-.modal button {
-    margin: 10px;
-    padding: 12px 25px; /* Aumentei o padding do botão */
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    background-color: rgb(148, 108, 243);
+    background-color: #593B7D;
     color: white;
+
 }
 
-.modal button:hover {
-    background-color: rgb(104, 0, 107);
-}
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
@@ -164,15 +116,299 @@ body {
         width: 30%; 
         margin-top: 60px;
     }
-    .modal-content {
-        background-color: white;
-        border-radius: 5px;
-        text-align: center;
-        width: 90%;
-        max-width: 90%;
-    }
+    
 }
 
 .sidebar{
     width: 50px;
+}
+
+/* Estilo Geral para todas as Modais */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 70%;
+    max-width: 600px;
+}
+
+/* Modal para Adicionar Card */
+#modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal .modal-content {
+    text-align: center;
+}
+
+#modal h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+#modal label {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+#modal input[type="text"],
+#modal input[type="file"] {
+    width: 93%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #593b7d;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#modal button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #593B7D;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#modal button:hover {
+    background-color: #593B7D;
+}
+
+/* Modal para Editar Card */
+#modal-edit .modal-content {
+    text-align: center;
+    padding: 20px;
+}
+
+#modal-edit h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+#modal-edit label {
+    display: flex;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+#modal-edit input[type="text"],
+#modal-edit input[type="file"] {
+    width: 93%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #593b7d;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+#modal-edit .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#modal-edit button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal-edit .save-button {
+    background-color: #593B7D;
+    color: white;
+}
+
+#modal-edit .save-button:hover {
+    background-color: #593B7D;
+}
+
+#modal-edit .delete-button {
+    background-color: rgb(255, 0, 0);
+    color: white;
+}
+
+#modal-edit .delete-button:hover {
+    background-color: rgb(139, 0, 0);
+}
+
+/* Modal para Gerenciar Tarefas */
+#modal-task .modal-content {
+    flex-direction: row;
+    width: 90%;
+    height: 90%;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Lado Direito: Formulário */
+#modal-task .modal-form {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+#modal-task .modal-form h2 {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#modal-task .modal-form input {
+    width: 93%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #593b7d;
+    border-radius: 5px;
+}
+
+#modal-task .modal-form button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #593B7D;
+    color: white;
+    cursor: pointer;
+}
+
+#modal-task .modal-form button:hover {
+    background-color: #593B7D;
+}
+
+/* Lado Esquerdo: Lista de Tarefas */
+#modal-task .modal-tasks {
+    flex: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    overflow-y: auto;
+    border-left: 1px solid #ddd;
+}
+
+#modal-task .modal-tasks h2 {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+#modal-task .modal-tasks .task-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#task-buttons{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #593B7D;
+    color: white;
+    cursor: pointer;
+}
+#notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(20px);
+
+}
+
+#notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#notification.hidden {
+    display: none;
+}
+#confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#confirmation-modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.confirm-button {
+    background: #dc3545;
+    color: #fff;
+}
+
+.cancel-button {
+    background: #6c757d;
+    color: #fff;
 }

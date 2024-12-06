@@ -24,7 +24,7 @@
                     </button>
                 </a>
 
-                <a href="calendar.html">
+                <a href="{{ route('calendar') }}">
                     <button class="nav-button">
                         <i class="fas fa-calendar-alt"></i>
                         <span>Calendário</span>

@@ -1,0 +1,182 @@
+/* Estilo principal */
+.main {
+    margin-left: 130px;
+    padding: 50px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-top: 0;
+    margin-left: 120px;
+}
+
+/* Contêiner do calendário */
+.calendar-container {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.calendar-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Cabeçalho das semanas */
+.week-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    background-color: #bdc5f3;
+    color: rgb(0, 0, 0);
+    margin-left: 120px;
+    padding: 5px 0;
+    border-radius: 5px;
+    width: 80%;
+}
+
+/* Estilo padrão dos dias do calendário */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 70%;
+    margin-left: 120px;
+    margin-right: 120px;
+    width: 80%;
+}
+
+.calendar-day {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Dias vazios (fora do mês) */
+.calendar-day.empty {
+    background-color: transparent;
+    border: none;
+}
+
+/* Hover nos dias do calendário */
+.calendar-day:hover {
+    background-color: #bdc5f3;
+    transform: scale(1.05);
+}
+
+/* Estilo para dias com tarefas */
+.calendar-day.has-tasks {
+    background-color: #e0f7fa;
+    border: 2px solid #00796b;
+}
+
+/* Estilo das tarefas dentro dos dias */
+.task {
+    background-color: #00796b;
+    color: #fff;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-top: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Estilos para responsividade */
+@media (max-width: 768px) {
+    .main {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    h1 {
+        margin-top: 120px;
+        margin-left: 20px;
+        width: 90%;
+    }
+
+    .calendar-header {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .calendar-grid {
+        width: 90%;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .calendar-day {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .week-header {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .task {
+        font-size: 10px;
+        padding: 1px 3px;
+    }
+}
+/* Modal estilos */
+#task-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#task-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    max-width: 90%;
+}
+
+#task-modal-content h2 {
+    margin: 0 0 15px;
+    font-size: 18px;
+}
+
+.close-modal {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.close-modal:hover {
+    background: darkred;
+}

@@ -75,41 +75,43 @@
             </div>
         </div>
     </div>
-    <!--Footer-->
-    <footer class="footer">
+   <!--Footer-->
+   <footer class="footer">
         <div class="footer-container">
             <div class="footer-row">
                 <div class="footer-col">
                     <h4>Dejavu</h4>
                     <ul>
                         <li>
-                            <p>Lorem ipsum dolor sit amet, consectetur <br> adipiscing elit, sed do eiusmod tempor <br>
-                                incididunt ut labore et dolore magna <br> aliqua. </p>
+                            <p>Agora você pode planejar, priorizar e acompanhar suas atividades diárias de forma fácil e
+                                eficiente. Menos stress, mais produtividade! </p>
                         </li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Sobre</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">Sobre</a></li>
-                        <li><a href="#">Plano</a></li>
+                        <li><a href="{{ route('index') }}">Home</a></li>
+                        <li><a href="{{ route('contacts') }}">Contato</a></li>
+                        <li><a href="{{ route('about-us') }}">Sobre</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
-                    <h4>Informação</h4>
+                    <h4>Sobre-Nós</h4>
                     <ul>
-                        <li><a href="#">Politica de privacidade</a></li>
-                        <li><a href="#">Termos&Condições</a></li>
-                        <li><a href="#">Suporte</a></li>
+                        <li><a
+                                href="https://linktr.ee/Dejavu?fbclid=PAZXh0bgNhZW0CMTEAAabGfx4kNTHa0phtPDyny1ZAzAECH2b77p-4Su1iL6ocpHOZIFIpZxYQfFw_aem_Cg3NWZqrG1AzPhLRB3C46Q">Linktree</a>
+                        </li>
+                        <li style="visibility: hidden;"><a href="#">Termos&Condições</a></li>
+                        <li style="visibility: hidden;"><a href="#">Suporte</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href=" https://www.instagram.com/oficialmeudejavu/ "><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/dejavu-undefined-3b9035338/"><i
+                                class="bi bi-linkedin"></i></a>
                     </div>
                 </div>
             </div>

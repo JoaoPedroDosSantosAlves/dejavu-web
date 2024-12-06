@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CalendarController;
 
 // Rota de login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -66,8 +67,20 @@ Route::get('/home', [CardController::class, 'index'])->name('home');
 
 Route::post('tasks/{cardId}/store', [TaskController::class, 'store'])->name('tasks.store');
 
-Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
+Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+Route::post('/tasks/{task}/update', [TaskController::class, 'update'])->name('tasks.update');
 
-Route::get('/tasks/{cardId}', [TaskController::class, 'index'])->name('tasks.index');
+Route::delete('/cards/{id}', [CardController::class, 'destroy'])->name('cards.destroy');
 
-Route::delete('/cards/{card}', [CardController::class, 'destroy'])->name('cards.destroy');
+// Rota para listar as tarefas do card
+
+Route::resource('tasks', TaskController::class);
+Route::get('tasks/list/{cardId}', [TaskController::class, 'list']); // Para listar as tarefas de um card
+Route::post('tasks/{cardId}/store', [TaskController::class, 'store']); // Para criar uma nova tarefa
+Route::put('/tasks/{task}/update', [TaskController::class, 'update'])->name('tasks.update');
+Route::delete('/tasks/{task}/destroy', [TaskController::class, 'destroy'])->name('tasks.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
+    Route::get('/calendar/tasks/{date}', [CalendarController::class, 'getTasksForDate'])->name('calendar.tasks');
+});

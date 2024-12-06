@@ -16,4 +16,9 @@ class CardPolicy
 {
     return $user->id === $card->user_id;
 }
+public function update(User $user, Card $card)
+    {
+        // Apenas o proprietário do card pode atualizá-lo, ou se o usuário for administrador
+        return $user->id === $card->user_id || $user->is_admin;
+    }
 }
