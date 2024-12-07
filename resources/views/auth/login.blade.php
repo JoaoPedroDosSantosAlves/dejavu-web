@@ -8,26 +8,22 @@
   <title>Login</title>
   <link rel="stylesheet" href="{{ asset('css/login.css') }}" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- SweetAlert2 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
-
 </head>
 
 <body>
   <main>
     <!-- Mensagens de Sucesso ou Erro -->
-    @if (session('success'))
-    <div id="message-success" class="message-container message-success">
+  @if (session('success'))
+    <div class="message-container message-success">
       {{ session('success') }}
     </div>
-    @endif
+  @endif
 
-    @if (session('error'))
-    <div id="message-error" class="message-container message-error">
+  @if (session('error'))
+    <div class="message-container message-error">
       {{ session('error') }}
     </div>
-    @endif
-
+  @endif
     <div class="box">
       <div class="inner-box">
         <div class="forms-wrap">
@@ -57,7 +53,9 @@
               </div>
 
               <p class="text">
+              <p class="text">
                 <a id="lbl-help" href="{{ route('password.request') }}">Esqueceu a Senha?</a>
+              </p>
               </p>
               <input type="submit" value="Entrar" class="sign-btn" />
             </div>
@@ -90,19 +88,22 @@
       </div>
     </div>
   </main>
-
-  <!-- SweetAlert2 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
-
-  <!-- SweetAlert2 JS -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
-
-  <!-- JavaScript Externo -->
-  <script src="{{ asset('js/alerts.js') }}"></script>
+  <script>
+    // Script para desaparecer as mensagens automaticamente
+    document.addEventListener('DOMContentLoaded', function () {
+        const message = document.querySelector('.message-container');
+        if (message) {
+            setTimeout(() => {
+                message.style.transition = 'opacity 0.5s ease';
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 500); // Remove o elemento após o fade-out
+            }, 3000); // Tempo em milissegundos antes de desaparecer (3 segundos)
+        }
+    });
+</script>
 
   <!-- Javascript file -->
   <script src="{{ asset('js/register-login.js') }}"></script>
 </body>
-
 
 </html>

@@ -79,8 +79,6 @@
             <i class="fas fa-bars"></i>
         </div>
 
-    <script src="{{ asset('js/quiz.js') }}"></script> <!-- Script home.js -->
-    <script src="{{ asset('js/to-do-list.js') }}"></script>
     <script src="{{ asset('js/sidebar.js') }}"></script>
 
 </body>

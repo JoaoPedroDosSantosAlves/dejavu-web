@@ -36,10 +36,13 @@ function loadTasks(cardId) {
         <div class="task-buttons">
             <button class="btn btn-primary btn-sm" onclick="editTask(${task.id})">Editar</button>
             <button class="btn btn-danger btn-sm" onclick="deleteTask(${task.id})">Excluir</button>
+            <button class="btn btn-success btn-sm" onclick="completeTask(${task.id})">
+                ${task.status === 'concluída' ? 'Reabrir' : 'Concluir'}
+            </button>
         </div>
     </div>
 `;
-$('#task-container').append(taskItem);
+                    $('#task-container').append(taskItem);
                 });
             } else {
                 $('#task-container').append('<p>Não há tarefas para este card.</p>');
@@ -47,6 +50,24 @@ $('#task-container').append(taskItem);
         },
         error: function (error) {
             console.error("Erro ao carregar tarefas:", error);
+        }
+    });
+}
+
+function completeTask(taskId) {
+    $.ajax({
+        url: `/tasks/${taskId}/complete`,
+        type: 'POST',
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            showNotification(response.message, 'success');
+            loadTasks($('#card_id').val()); // Recarrega a lista de tarefas
+        },
+        error: function (error) {
+            console.error("Erro ao concluir tarefa:", error);
+            showNotification("Erro ao concluir a tarefa.", 'error');
         }
     });
 }

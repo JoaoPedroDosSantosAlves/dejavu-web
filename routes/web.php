@@ -84,5 +84,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
     Route::get('/calendar/tasks/{date}', [CalendarController::class, 'getTasksForDate'])->name('calendar.tasks');
 });
-Route::post('/check-email', [RegisteredUserController::class, 'checkEmail'])->name('check.email');
-
+Route::post('/tasks/{task}/complete', [TaskController::class, 'complete']);

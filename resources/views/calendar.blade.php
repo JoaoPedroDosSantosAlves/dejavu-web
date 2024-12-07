@@ -13,6 +13,9 @@
 
 <body>
     <div class="container">
+    <div class="hamburger" Onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </div>
         <!-- Sidebar -->
         <div class="sidebar">
             <img src="{{ asset('/images/writelogo.png') }}">
@@ -52,10 +55,6 @@
                 </a>
             </div>
         </div>
-        <div class="hamburger" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </div>
-
         <!-- Main Content -->
         <div class="main">
             <h1>Calendário de Tarefas</h1>
@@ -123,16 +122,17 @@
 
     <script>
         function navigateMonth(direction) {
-            const currentMonth = {
-                
+            let currentMonth = {
+                {
                     $month
-                
-            };
-            const currentYear = {
-                
+                }
+            }; // Use 'let' aqui, pois você vai modificar o valor de currentMonth
+            let currentYear = {
+                {
                     $year
-                
-            };
+                }
+            }; // Use 'let' aqui também, para poder modificar currentYear
+
             let newMonth = currentMonth + direction;
 
             if (newMonth > 12) {
@@ -143,6 +143,7 @@
                 currentYear--;
             }
 
+            // Redireciona para o novo mês e ano
             window.location.href = `/calendar?month=${newMonth}&year=${currentYear}`;
         }
 
@@ -182,6 +183,7 @@
             modal.style.display = 'none';
         }
     </script>
+    <script src="{{ asset('js/sidebar.js') }}"></script>
 </body>
 
 </html>

@@ -412,3 +412,11 @@ body {
     background: #6c757d;
     color: #fff;
 }
+#modal-task button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #593B7D;
+    color: white;
+    cursor: pointer;
+}

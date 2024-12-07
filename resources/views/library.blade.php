@@ -9,18 +9,18 @@
     <title>Biblioteca</title>
     <link rel="icon" href="assets/img/dejavu-logo.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
         <div class="sidebar">
             <img src="{{ asset('/images/writelogo.png') }}">
             <div class="menu">
-               
 
-            <a href="{{ route('home') }}">
+
+                <a href="{{ route('home') }}">
                     <button class="nav-button">
                         <i class="fas fa-home"></i>
                         <span>Cartões</span>
@@ -40,8 +40,8 @@
                     </button>
                 </a>
 
-                 <!-- Botão para abrir o modal com ícone + -->
-                 <a href="{{ route('quiz') }}">
+                <!-- Botão para abrir o modal com ícone + -->
+                <a href="{{ route('quiz') }}">
                     <button class="nav-button">
                         <i class="fas fa-question-circle"></i>
                         <span>Quiz</span>
@@ -61,13 +61,13 @@
             <!-- Slideshow -->
             <div class="slideshow">
                 <div class="slide active">
-                <img src="{{ asset('/images/daily.jpg') }}">
+                    <img src="{{ asset('/images/daily.jpg') }}">
                 </div>
                 <div class="slide">
-                <img src="{{ asset('/images/work-table.webp') }}">
+                    <img src="{{ asset('/images/work-table.webp') }}">
                 </div>
                 <div class="slide">
-                <img src="{{ asset('/images/conversation.jpg') }}">
+                    <img src="{{ asset('/images/conversation.jpg') }}">
                 </div>
             </div>
 
@@ -85,7 +85,7 @@
                         <p>Publicado há 1 hora — Em Organização</p>
                     </div>
                 </div>
-                
+
                 <div class="noticia">
                     <iframe src="https://www.youtube.com/embed/ME1ZT8hnUSM?si=F2xI6erXeoVaEfjS" allowfullscreen></iframe>
                     <div class="noticia-content">
@@ -120,11 +120,26 @@
     <div class="hamburger" onclick="toggleSidebar()">
         <i class="fas fa-bars"></i>
     </div>
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
 
-    <script src="{{ asset('js/add-card.js') }}"></script> <!-- Script home.js -->
-    <script src="{{ asset('js/to-do-list.js') }}"></script>
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
 
-    <script src="{{ asset('js/sidebar.js') }}"></script>
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlide(slideIndex);
+        }
+
+
+
+
+        setInterval(nextSlide, 3000); // Altere o valor para ajustar o intervalo do slide (em milissegundos)
+        showSlide(slideIndex);
+    </Script>
 </body>
-
 </html>

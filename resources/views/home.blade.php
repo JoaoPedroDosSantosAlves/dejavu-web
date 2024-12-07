@@ -58,7 +58,7 @@
         </div>
         <!-- Main Content -->
         <div class="main">
-            <h1>Seus Cards</h1>
+            <h1>Meus Cards</h1>
 
             <!-- Botão de adicionar -->
             <button onclick="openModal()" class="add-task-button">Adicionar Card</button>

@@ -8,17 +8,28 @@
     <title>Cadastrar-se dejavu</title>
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
 </head>
 
-<body data-success-message="{{ session('success') }}" 
-      data-error-message="{{ session('error') }}" 
-      data-validation-errors="{{ $errors->first('password_confirmation') }}">
-
-
+<body>
     <main>
+        <!-- Mensagens de erro -->
+        @if ($errors->any())
+        <div class="error-messages">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <!-- Mensagem de sucesso -->
+        @if (session('success'))
+        <div class="success-message">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <div class="box">
             <div class="inner-box">
                 <div class="forms-wrap">

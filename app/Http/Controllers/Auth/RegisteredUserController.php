@@ -16,34 +16,30 @@ class RegisteredUserController extends Controller
         return view('auth.register'); // A view deve estar em resources/views/auth/register.blade.php
     }
 
-    public function checkEmail(Request $request)
-    {
-        $emailExists = User::where('email', $request->email)->exists();
-
-        return response()->json(['exists' => $emailExists]);
-    }
-
     // Método para processar o registro
     public function register(Request $request)
-    {
-        // Validação das senhas com mensagens personalizadas
-        $validated = $request->validate([
-            'name' => 'required|min:4',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password', // A validação 'same' verifica se as senhas coincidem
-        ], [
-            'password_confirmation.same' => 'As senhas não coincidem', // Mensagem personalizada para a regra 'same'
-        ]);
+{
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|string|min:4',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
+    ]);
 
-        // Se passar na validação, cria o usuário
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput();
+    }
 
-        // Redireciona com mensagem de sucesso
-        return redirect()->route('register')->with('success', 'Sua conta foi criada com sucesso!');
+    // Cadastro bem-sucedido
+    User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+    ]);
+
+        // Redireciona após o cadastro
+        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso. Você pode fazer login.');
     }
 }
+

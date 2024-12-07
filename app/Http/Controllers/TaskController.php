@@ -86,4 +86,14 @@ class TaskController extends Controller
         $task->delete(); // Deleta a tarefa
         return response()->json(['message' => 'Tarefa excluída com sucesso']);
     }
+    public function complete($id)
+{
+    $task = Task::findOrFail($id);
+
+    // Alterna o status da tarefa
+    $task->status = $task->status === 'NÃO CONCLUÍDO' ?  : 'CONCLUÍDO';
+    $task->save();
+
+    return response()->json(['message' => 'Tarefa atualizada com sucesso!']);
+}
 }
